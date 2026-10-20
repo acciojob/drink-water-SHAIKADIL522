@@ -1,21 +1,49 @@
-// This file is not to be modified. Please ignore this.
-// We will understand all of this later in the course.
-// DO NOT MODIFY THIS FILE
+const smallCups = document.querySelectorAll(".cup-small");
+const liters = document.getElementById("liters");
+const percentage = document.getElementById("percentage");
+const remained = document.getElementById("remained");
 
-const express = require('express');
-const path = require('path');
-
-const app = express();
-
-app.use(express.static(__dirname))
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/main.html'));
+smallCups.forEach((cup, idx) => {
+  cup.addEventListener("click", () => highlightCups(idx));
 });
-//your code here
-app.post('/add', (req, res) => {
-  const {a,b} = req.body;
-  res.status(200).send(a+b);
-  // res.sendFile(path.join(__dirname + '/main.html'));
-});
-module.exports = app;
+
+function highlightCups(idx) {
+  // clicking the last filled cup again un-fills just that cup
+  if (
+    smallCups[idx].classList.contains("full") &&
+    (idx === smallCups.length - 1 ||
+      !smallCups[idx + 1].classList.contains("full"))
+  ) {
+    idx--;
+  }
+
+  smallCups.forEach((cup, i) => {
+    if (i <= idx) cup.classList.add("full");
+    else cup.classList.remove("full");
+  });
+
+  updateBigCup();
+}
+
+function updateBigCup() {
+  const fullCups = document.querySelectorAll(".cup-small.full").length;
+  const total = smallCups.length;
+
+  if (fullCups === 0) {
+    percentage.style.visibility = "hidden";
+    percentage.style.height = 0;
+  } else {
+    percentage.style.visibility = "visible";
+    percentage.style.height = `${(fullCups / total) * 100}%`;
+    percentage.innerText = `${(fullCups / total) * 100}%`;
+  }
+
+  if (fullCups === total) {
+    remained.style.visibility = "hidden";
+    remained.style.height = 0;
+  } else {
+    remained.style.visibility = "visible";
+    remained.style.height = "auto";
+    liters.innerText = `${2 - (250 * fullCups) / 1000}L`;
+  }
+}

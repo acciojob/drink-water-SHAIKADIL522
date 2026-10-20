@@ -1,1 +1,80 @@
 /*  your css code here. If applicable */
+* { box-sizing: border-box; }
+
+body {
+  background: #3494e4;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h1 { margin: 10px 0 0; }
+h3 { margin: 5px 0 20px; font-weight: 400; }
+
+.cup {
+  background: #fff;
+  border: 4px solid #144fc6;
+  color: #144fc6;
+  border-radius: 0 0 40px 40px;
+  height: 330px;
+  width: 150px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.cup .remained {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+}
+.cup .remained span { font-size: 20px; font-weight: bold; }
+.cup .remained small { font-size: 12px; }
+
+.cup .percentage {
+  background: #6ab3f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0;
+  font-size: 30px;
+  transition: height 0.3s ease;
+}
+
+.text { text-align: center; margin: 0 0 15px; }
+
+.cups {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+}
+
+.cup.cup-small {
+  background: #e4f2ff;
+  border-radius: 0 0 15px 15px;
+  height: 95px;
+  width: 50px;
+  margin: 5px;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cup.cup-small.full {
+  background: #6ab3f8;
+  color: #fff;
+}
